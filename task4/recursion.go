@@ -1,8 +1,10 @@
 package task4
 
 func Calculate(a, b int) int {
-	if b == 0 {
-		return a
+	for {
+		if b == 0 {
+			return a
+		}
+		a, b = b, a % b
 	}
-	return Calculate(b, a%b)
 }
