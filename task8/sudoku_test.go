@@ -1,18 +1,17 @@
 package task8
 
 import (
-	"fmt"
 	"testing"
 )
 
-func TestSudokuCheck(t *testing.T) {
+func TestSudoku(t *testing.T) {
 	testTable := []struct {
 		Expect bool
-		Matrix [9][9]int
+		Sudoku Sudoku
 	}{
 		{
 			true,
-			[9][9]int{
+			Sudoku{
 				{1, 8, 2, 5, 4, 3, 6, 9, 7},
 				{9, 6, 5, 1, 7, 8, 3, 4, 2},
 				{7, 4, 3, 9, 6, 2, 8, 1, 5},
@@ -26,7 +25,7 @@ func TestSudokuCheck(t *testing.T) {
 		},
 		{
 			false,
-			[9][9]int{
+			Sudoku{
 				{1, 6, 2, 5, 4, 3, 6, 9, 7},
 				{9, 8, 5, 1, 7, 8, 3, 4, 2},
 				{7, 4, 3, 9, 6, 2, 8, 1, 5},
@@ -40,7 +39,7 @@ func TestSudokuCheck(t *testing.T) {
 		},
 		{
 			false,
-			[9][9]int{
+			Sudoku{
 				{1, 7, 2, 5, 4, 3, 6, 9, 7},
 				{9, 7, 5, 1, 7, 8, 3, 4, 2},
 				{7, 4, 3, 9, 6, 2, 8, 1, 5},
@@ -54,18 +53,9 @@ func TestSudokuCheck(t *testing.T) {
 		},
 	}
 	for i, v := range testTable {
-		actual := SudokuCheck(v.Matrix)
+		actual := v.Sudoku.Check()
 		if actual != v.Expect {
 			t.Errorf("Unexpected result of test %v, got %v\n", i+1, actual)
 		}
-	}
-}
-
-func TestBoxMatrix(t *testing.T) {
-	for i := 0; i < 9; i++ {
-		for j := 0; j < 9; j++ {
-			fmt.Printf("(%v, %v) ", i/3*3 + j/3, (i%3*3)+(j%3))
-		}
-		fmt.Println()
 	}
 }
